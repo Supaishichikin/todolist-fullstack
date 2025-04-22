@@ -1,0 +1,15 @@
+# Global
+.env
+*.sqlite3
+__pycache__/
+*.pyc
+
+# Node.js (pour frontend/)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Python virtual environments
+venv/
+backend-drf/venv/
+backend-fastapi/venv/

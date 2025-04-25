@@ -1,8 +1,12 @@
-import { Button, Offcanvas } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import SidebarItem from "./SidebarItem";
 import "../css/Sidebar.css";
+import LogoutModal from "../modals/LogoutModal";
+import { useState } from "react";
 
 export default function Sidebar(){
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+
     return <>
         <Offcanvas className="sidebar" show={true} backdrop={false} >
             <div>
@@ -23,10 +27,11 @@ export default function Sidebar(){
                 </Offcanvas.Body>
             </div>
             <div className="d-flex justify-content-start">
-                <span className="material-icons text-black power-settings-icon">
+                <span onClick={() => setShowLogoutModal(true)} className="material-icons text-black power-settings-icon">
                     power_settings_new
                 </span>
             </div>
+            <LogoutModal open={showLogoutModal} setOpen={setShowLogoutModal} />
         </Offcanvas>
     </>
 }

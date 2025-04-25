@@ -1,9 +1,10 @@
-import { Button, Offcanvas } from "react-bootstrap"
-import "./Sidebar.css"
+import { Button, Offcanvas } from "react-bootstrap";
+import SidebarItem from "./SidebarItem";
+import "../css/Sidebar.css";
 
 export default function Sidebar(){
     return <>
-        <Offcanvas className="sidebar" show={true} >
+        <Offcanvas className="sidebar" show={true} backdrop={false} >
             <div>
                 <Offcanvas.Header>
                     <Offcanvas.Title>
@@ -15,30 +16,9 @@ export default function Sidebar(){
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <div className="sidebar-content">
-                        <div className="sidebar-item">
-                            <span className="material-icons sidebar-item-icon">
-                                home
-                            </span>
-                            <span className="sidebar-item-text">
-                                Home
-                            </span>
-                        </div>
-                        <div className="sidebar-item">
-                            <span className="material-icons sidebar-item-icon">
-                                settings
-                            </span>
-                            <span className="sidebar-item-text">
-                                Account settings
-                            </span>
-                        </div>
-                        <div className="sidebar-item">
-                            <span className="material-icons sidebar-item-icon">
-                                emoji_events
-                            </span>
-                            <span className="sidebar-item-text">
-                                Achievements
-                            </span>
-                        </div>
+                        <SidebarItem link="/" icon="home" text="Home" />
+                        <SidebarItem link="/settings" icon="settings" text="Account settings" />
+                        <SidebarItem link="/achievements" icon="emoji_events" text="Achievements" />
                     </div>
                 </Offcanvas.Body>
             </div>

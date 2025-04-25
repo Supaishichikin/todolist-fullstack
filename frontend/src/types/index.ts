@@ -5,12 +5,15 @@ export interface Todo {
     completed: boolean;
     created_at: Date;
     updated_at: Date;
+    completed_at: Date;
+    to_complete_at: Date;
   }
   
   // Pour créer une todo (pas encore d'id, ni created_at ni updated_at)
   export interface CreateTodo {
     title: string;
     description?: string;
+    to_complete_at: Date;
   }
   
   // Représente un utilisateur

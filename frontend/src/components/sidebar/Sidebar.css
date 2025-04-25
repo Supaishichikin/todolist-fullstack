@@ -1,0 +1,52 @@
+div.offcanvas-backdrop{
+    background-color: #f5f5f5;
+}
+
+div.sidebar.offcanvas{
+    background-color: #D9D9D9;
+    width: 16.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.user-initials{
+    width: 83px;
+    height: 83px;
+    text-transform: uppercase;
+    background-color: #454545;
+    border-radius: 50%;
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+span.power-settings-icon{
+    font-size: 70px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.offcanvas-title{
+    margin: 0 auto;
+}
+
+.sidebar-item{
+    width: 82%;
+    height: 60px;
+    margin: 0 auto;
+    background-color: #828282;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+span.sidebar-item-text{
+    margin-left: 5px;
+}
+
+.sidebar-item-icon{
+    margin-left: 10px;
+}

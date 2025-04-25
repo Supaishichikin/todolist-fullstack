@@ -1,8 +1,11 @@
+import Router from "./routes";
+import { BrowserRouter } from "react-router-dom";
+
 function App() {
   return (
-    <div className="container mt-5">
-      <h1>Todo App</h1>
-    </div>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 

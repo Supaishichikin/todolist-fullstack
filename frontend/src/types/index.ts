@@ -15,6 +15,14 @@ export interface Todo {
     description?: string;
     to_complete_at: Date;
   }
+
+  // Pour mettre à jour une todo
+  export interface UpdateTodo {
+    title?: string;
+    description?: string;
+    to_complete_at?: Date;
+    completed?: boolean;
+  }
   
   // Représente un utilisateur
   export interface User {

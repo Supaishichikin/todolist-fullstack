@@ -1,4 +1,4 @@
-import "../css/TaskCard.css";
+import "../../css/TaskCard.css";
 import TaskModals from "../modals/TaskModals";
 import { useState } from "react";
 import { UpdateTodo } from "../../types";
@@ -21,8 +21,16 @@ export default function TaskCard(props:{ id: string, values: UpdateTodo}){
                 {props.values.description}
             </span>
         </div>
+        <div className="task-card-footer">
+            <span className="task-card-priority">
+                {props.values.priority}
+            </span><br/>
+            <span className="task-card-status">
+                {props.values.status}
+            </span>
+        </div>
         <TaskModals new={false} show={showTaskModal} setShow={setShowTaskModal} 
         id={props.id} values={{title:props.values.title, description:props.values.description,
-        to_complete_at:props.values.to_complete_at, completed:props.values.completed}} />
+        to_complete_at:props.values.to_complete_at, priority:props.values.priority, status:props.values.status}} />
     </div>
 }

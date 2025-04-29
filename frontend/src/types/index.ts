@@ -2,18 +2,33 @@
 export interface Todo {
     id: number;
     title: string;
-    completed: boolean;
+    status: Status;
+    priority: Priority;
     created_at: Date;
     updated_at: Date;
     completed_at: Date;
     to_complete_at: Date;
   }
+
+  export enum Status {
+    Todo = "Todo",
+    InProgress = "InProgress",
+    Done = "Done"
+  }
+
+  export enum Priority {
+    Low = "Low",
+    Medium = "Medium",
+    High = "High"
+  }  
+  
   
   // Pour créer une todo (pas encore d'id, ni created_at ni updated_at)
   export interface CreateTodo {
     title: string;
     description?: string;
     to_complete_at: Date;
+    priority: Priority;
   }
 
   // Pour mettre à jour une todo
@@ -21,7 +36,8 @@ export interface Todo {
     title?: string;
     description?: string;
     to_complete_at?: Date;
-    completed?: boolean;
+    priority?: Priority;
+    status?: Status;
   }
   
   // Représente un utilisateur

@@ -11,6 +11,7 @@ div.sidebar.offcanvas{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: none;
 }
 
 div.user-initials{

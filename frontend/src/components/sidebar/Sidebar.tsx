@@ -1,6 +1,6 @@
 import { Offcanvas } from "react-bootstrap";
 import SidebarItem from "./SidebarItem";
-import "../css/Sidebar.css";
+import "../../css/Sidebar.css";
 import LogoutModal from "../modals/LogoutModal";
 import { useState } from "react";
 

@@ -1,8 +1,9 @@
 import { Container } from "react-bootstrap";
-import "../components/css/Home.css";
+import "../css/Home.css";
 import TaskCard from "../components/cards/TaskCard";
 import TaskModals from "../components/modals/TaskModals";
 import { useState } from "react";
+import { Priority, Status } from "../types";
 
 export default function HomeTodos() {
     const [showTaskModal, setShowTaskModal] = useState(false);
@@ -19,11 +20,11 @@ export default function HomeTodos() {
                 </div>
                 <div className="todo-column py-2">
                     <TaskCard id="1" values={{ title:"Task 1", description:"Description 1",
-                    to_complete_at:new Date('2025-04-25T10:30:00'), completed:false}} />
+                    to_complete_at:new Date('2025-04-25T10:30:00'), priority:Priority.Low, status:Status.Todo}} />
                     <TaskCard id="2" values={{ title:"Task 2", description:"Description 2",
-                    to_complete_at:new Date('2025-04-25T11:30:00'), completed:false}} />
+                    to_complete_at:new Date('2025-04-25T11:30:00'), priority:Priority.Medium, status:Status.Todo}} />
                     <TaskCard id="3" values={{ title:"Task 3", description:"Description 3",
-                    to_complete_at:new Date('2025-04-25T12:30:00'), completed:false}} />
+                    to_complete_at:new Date('2025-04-25T12:30:00'), priority:Priority.High, status:Status.Todo}} />
                 </div>
             </div>
             <div className="todo-column-container">

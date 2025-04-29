@@ -1,6 +1,6 @@
 import React from "react"
 import Sidebar from "../components/sidebar/Sidebar"
-import "../components/css/Layout.css"
+import "../css/Layout.css"
 
 export default function Layout({children}: LayoutProps){
     return <>

@@ -10,10 +10,10 @@ export default function TaskCard(props:Readonly<{ id: string, values: UpdateTask
         <div className="task-card-header">
             <div className="d-flex justify-content-center align-items-center">
                 <span className="task-card-title">{props.values.title}</span>
-                <span role="button" tabIndex={0} onClick={() => setShowTaskModal(true)} 
+                <button tabIndex={0} onClick={() => setShowTaskModal(true)} 
                 className="material-icons task-card-icon flex-end">
                     edit
-                </span>
+                </button>
             </div>
         </div>
         <div className="task-card-body mt-4">

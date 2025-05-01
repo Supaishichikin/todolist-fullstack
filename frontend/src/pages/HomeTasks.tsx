@@ -14,9 +14,9 @@ export default function HomeTasks() {
             <div className="task-column-container">
                 <div className="d-flex justify-content-between align-items-center">
                     <h3>To Do</h3>
-                    <span role="button" tabIndex={0} onClick={() => setShowTaskModal(true)} className="material-icons task-add-icon">
+                    <button tabIndex={0} onClick={() => setShowTaskModal(true)} className="material-icons task-add-icon">
                         add_circle_outline
-                    </span>
+                    </button>
                 </div>
                 <div className="task-column py-2">
                     <TaskCard id="1" values={{ title:"Task 1", description:"Description 1",

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function SidebarItem(props:{link: string, icon: string, text: string}){
-    return <>
-    <Link to={props.link} className="sidebar-item">
+export default function SidebarItem(props:Readonly<{link: string, icon: string, text: string}>){
+    return <Link to={props.link} className="sidebar-item">
         <span className="material-icons sidebar-item-icon">
             {props.icon}
         </span>
@@ -10,5 +9,4 @@ export default function SidebarItem(props:{link: string, icon: string, text: str
             {props.text}
         </span>
     </Link>
-    </>
 }

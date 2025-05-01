@@ -1,18 +1,17 @@
 import { Form} from "react-bootstrap"
-import { UpdateTodo, Status, Priority } from "../../types"
+import { UpdateTask, Status, Priority } from "../../types"
 import { useState } from "react";
 
-export default function FormTodo(props:{new:boolean, values:UpdateTodo}){
+export default function FormTask(props:Readonly<{new:boolean, values:UpdateTask}>){
 
     const [title, setTitle] = useState(props.values?.title??"");
     const [description, setDescription] = useState(props.values?.description??"");
-    const [to_complete_at, setToCompleteAt] = useState(props.values?.to_complete_at?
+    const [toCompleteAt, setToCompleteAt] = useState(props.values?.to_complete_at?
     props.values?.to_complete_at.toISOString().split('T')[0]:new Date().toISOString().split('T')[0]);
     const [status, setStatus] = useState(props.values?.status??Status.Todo);
     const [priority, setPriority] = useState(props.values?.priority??Priority.Low);
 
-    return <>
-        <Form>
+    return <Form>
             <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title</Form.Label>
                 <Form.Control type="text" value={title}
@@ -28,7 +27,7 @@ export default function FormTodo(props:{new:boolean, values:UpdateTodo}){
             <Form.Group className="mb-3" controlId="to_complete_at">
                 <Form.Label>To complete at</Form.Label>
                 <Form.Control type="date" 
-                value={to_complete_at}
+                value={toCompleteAt}
                 onChange={(e) => setToCompleteAt(e.target.value)    } />
             </Form.Group>
             <Form.Group className="mb-3" controlId="priority">
@@ -52,5 +51,4 @@ export default function FormTodo(props:{new:boolean, values:UpdateTodo}){
             </Form.Group>
             }
         </Form>
-    </>
 }

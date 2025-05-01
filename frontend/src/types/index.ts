@@ -1,5 +1,5 @@
-// Représente une tâche todo
-export interface Todo {
+// Représente une tâche task
+export interface Task {
     id: number;
     title: string;
     status: Status;
@@ -23,16 +23,16 @@ export interface Todo {
   }  
   
   
-  // Pour créer une todo (pas encore d'id, ni created_at ni updated_at)
-  export interface CreateTodo {
+  // Pour créer une task (pas encore d'id, ni created_at ni updated_at)
+  export interface CreateTask {
     title: string;
     description?: string;
     to_complete_at: Date;
     priority: Priority;
   }
 
-  // Pour mettre à jour une todo
-  export interface UpdateTodo {
+  // Pour mettre à jour une task
+  export interface UpdateTask {
     title?: string;
     description?: string;
     to_complete_at?: Date;

@@ -2,7 +2,7 @@ import React from "react"
 import Sidebar from "../components/sidebar/Sidebar"
 import "../css/Layout.css"
 
-export default function Layout({children}: LayoutProps){
+export default function Layout({children}: Readonly<LayoutProps>){
     return <>
         <Sidebar />
         <LayoutContent>

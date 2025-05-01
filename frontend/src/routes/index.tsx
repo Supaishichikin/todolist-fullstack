@@ -1,6 +1,6 @@
 import { useRoutes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import HomeTodos from "../pages/HomeTodos";
+import HomeTasks from "../pages/HomeTasks";
 import Login from "../pages/Login";
 import AccountSettings from "../pages/AccountSettings";
 import Layout from "../pages/Layout";
@@ -19,7 +19,7 @@ const RedirectToHome = () => {
 
 export default function Router() {
     return useRoutes([
-        { path: "/", element: <Layout><HomeTodos /></Layout> },
+        { path: "/", element: <Layout><HomeTasks /></Layout> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
         { path: "/settings", element: <Layout><AccountSettings /></Layout> },

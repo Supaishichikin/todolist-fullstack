@@ -1,9 +1,8 @@
 import { Form, FormGroup, FormControl, FormLabel, Button, FormText } from "react-bootstrap";
 
-export default function AuthForm(props: {email?: string, setEmail?: Function,
-        password?: string, setPassword?: Function, login?: boolean}){
-    return <>
-        <Form>
+export default function AuthForm(props:Readonly<{email?: string, setEmail?: Function,
+        password?: string, setPassword?: Function, login?: boolean}>){
+    return <Form>
             <FormGroup>
                 <FormLabel>Email</FormLabel>
                 <FormControl type="email" placeholder="Email" />
@@ -23,5 +22,4 @@ export default function AuthForm(props: {email?: string, setEmail?: Function,
                 </FormText>
             </div>
         </Form>
-    </>
 }

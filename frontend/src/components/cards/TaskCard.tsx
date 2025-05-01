@@ -1,16 +1,16 @@
 import "../../css/TaskCard.css";
 import TaskModals from "../modals/TaskModals";
 import { useState } from "react";
-import { UpdateTodo } from "../../types";
+import { UpdateTask } from "../../types";
 
-export default function TaskCard(props:{ id: string, values: UpdateTodo}){
+export default function TaskCard(props:Readonly<{ id: string, values: UpdateTask}>){
     const [showTaskModal, setShowTaskModal] = useState(false);
 
     return <div className="task-card">
         <div className="task-card-header">
             <div className="d-flex justify-content-center align-items-center">
                 <span className="task-card-title">{props.values.title}</span>
-                <span onClick={() => setShowTaskModal(true)} 
+                <span role="button" tabIndex={0} onClick={() => setShowTaskModal(true)} 
                 className="material-icons task-card-icon flex-end">
                     edit
                 </span>

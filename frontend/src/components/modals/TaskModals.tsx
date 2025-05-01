@@ -1,9 +1,9 @@
 import { Modal, Button } from "react-bootstrap";
-import { Priority, Status, UpdateTodo } from "../../types";
-import FormTodo from "../form/FormTodo";
+import { Priority, Status, UpdateTask } from "../../types";
+import FormTodo from "../form/FormTask";
 
-export default function TaskModals(props:{new:boolean, show:boolean, setShow:Function, id?:string, values?:UpdateTodo}){
-    const defaultValues: UpdateTodo = {
+export default function TaskModals(props:Readonly<{new:boolean, show:boolean, setShow:Function, id?:string, values?:UpdateTask}>){
+    const defaultValues: UpdateTask = {
         title: "",
         description: "",
         to_complete_at: new Date(),
@@ -11,8 +11,7 @@ export default function TaskModals(props:{new:boolean, show:boolean, setShow:Fun
         status: Status.Todo
     };
 
-    return <>
-        <Modal show={props.show} onHide={() => props.setShow(false)}>
+    return <Modal show={props.show} onHide={() => props.setShow(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>{props.new ? "New Task" : "Update Task"}</Modal.Title>
             </Modal.Header>
@@ -24,5 +23,4 @@ export default function TaskModals(props:{new:boolean, show:boolean, setShow:Fun
                 <Button variant="primary" onClick={() => props.setShow(false)}>Save</Button>
             </Modal.Footer>
         </Modal>
-    </>
 }

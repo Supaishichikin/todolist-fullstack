@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Status(models.TextChoices):
     TODO = 'Todo', 'Todo'
@@ -11,6 +14,7 @@ class Priority(models.TextChoices):
     HIGH = 'High', 'High'
 
 class Tasks(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     title = models.CharField(max_length=40)
     description = models.TextField(blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.TODO)

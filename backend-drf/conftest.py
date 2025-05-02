@@ -1,16 +1,19 @@
 import pytest
 from rest_framework.test import APIClient
-from django.contrib.auth.models import User
+from apps.accounts.models import CustomUser
 from apps.tasks.models import Tasks
 from rest_framework_simplejwt.tokens import RefreshToken
+
+User = CustomUser
 
 @pytest.fixture
 def api_client():
     return APIClient()
 
 @pytest.fixture
-def create_task():
+def create_task(test_user):
     task = Tasks.objects.create(
+        user=test_user,
         title="Buy milk",
         description="From the market",
         priority="Medium",

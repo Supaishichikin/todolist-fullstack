@@ -2,11 +2,25 @@ import { Container } from "react-bootstrap";
 import "../css/Home.css";
 import TaskCard from "../components/cards/TaskCard";
 import TaskModals from "../components/modals/TaskModals";
-import { useState } from "react";
-import { Priority, Status } from "../types";
+import { useEffect, useState } from "react";
+import { Priority, Status, Task } from "../types";
+import { getTasks } from "../services/TaskServices";
 
 export default function HomeTasks() {
     const [showTaskModal, setShowTaskModal] = useState(false);
+    const [tasks, setTasks] = useState([] as Task[])
+
+    useEffect(() => {
+        getTasks().then((response) =>{
+            setTasks(response)
+        })
+    },[])
+
+    useEffect(()=>{
+        if(tasks.length > 0){
+            console.log(tasks)
+        }
+    }, [tasks])
 
     return <Container className="home-container">
         <h1 className="text-center mt-5 task-title">Tasks</h1>
@@ -14,7 +28,8 @@ export default function HomeTasks() {
             <div className="task-column-container">
                 <div className="d-flex justify-content-between align-items-center">
                     <h3>To Do</h3>
-                    <button tabIndex={0} onClick={() => setShowTaskModal(true)} className="material-icons task-add-icon">
+                    <button tabIndex={0} onClick={() => setShowTaskModal(true)}
+                    className="material-icons task-add-icon">
                         add_circle_outline
                     </button>
                 </div>

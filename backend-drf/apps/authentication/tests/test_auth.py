@@ -3,9 +3,10 @@
 import pytest
 from django.utils.http import urlsafe_base64_decode
 from django.urls import reverse
-from django.contrib.auth.models import User
+from apps.accounts.models import CustomUser
 from rest_framework import status
 from django.core import mail
+
 
 @pytest.mark.django_db
 def test_register(api_client):
@@ -17,7 +18,7 @@ def test_register(api_client):
     }
     res = api_client.post(url, data)
     assert res.status_code == status.HTTP_201_CREATED
-    assert User.objects.filter(username="newuser").exists()
+    assert CustomUser.objects.filter(username="newuser").exists()
 
 @pytest.mark.django_db
 def test_login(api_client, test_user):

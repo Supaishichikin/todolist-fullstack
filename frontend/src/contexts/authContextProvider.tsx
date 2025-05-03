@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useContext } from "react";
 import AuthContext from "./authContext";
 import { AuthProviderInterface } from "../types/users";
-import { UserLogin, UserLogout } from "../services/AuthServices";
+import { UserLogin, UserLogout, UserRefreshToken } from "../services/AuthServices";
 
 function isTokenExpired(token: string) {
     if (!token) {
@@ -15,16 +15,25 @@ function isTokenExpired(token: string) {
 
 export const AuthProvider: React.FC<AuthProviderInterface> = ({ children }) => {
     const accessToken = localStorage.getItem("userToken") as string;
+    const refreshToken = localStorage.getItem("userRefreshToken") as string;
 
     const [userToken, setUserToken] = useState<string | null>(accessToken
     !== null && !isTokenExpired(accessToken) ? accessToken : null);
+    const userRefreshToken = refreshToken
+    !== null && !isTokenExpired(refreshToken) ? refreshToken : null;
     const [isAuthenticated, setIsAuthenticated] = useState(userToken !== null);
 
     useEffect(() => {
         if (userToken !== null) {
             setIsAuthenticated(true);
-        }else{
+        } else if (userRefreshToken) {
+            UserRefreshToken(refreshToken).then((response) => {
+                setUserToken(response.data.access)
+                localStorage.setItem('userToken', response.data.access)
+            })
+        } else {
             setIsAuthenticated(false);
+            localStorage.clear()
         }
     }, [userToken]);
 

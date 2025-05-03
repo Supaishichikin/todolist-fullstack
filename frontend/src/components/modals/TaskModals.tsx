@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import { Priority, Status, UpdateTask } from "../../types";
+import { Priority, Status, UpdateTask } from "../../types/tasks";
 import FormTodo from "../form/FormTask";
 
 export default function TaskModals(props:Readonly<{new:boolean, show:boolean, setShow:Function, id?:string, values?:UpdateTask}>){

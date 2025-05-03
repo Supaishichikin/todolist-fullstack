@@ -1,16 +1,41 @@
 import { Form, FormGroup, FormControl, FormLabel, Button, FormText } from "react-bootstrap";
+import { useAuth } from "../../contexts/authContextProvider";
+import { useNavigate } from "react-router-dom";
+import { UserRegister } from "../../services/AuthServices";
 
-export default function AuthForm(props:Readonly<{email?: string, setEmail?: Function,
-        password?: string, setPassword?: Function, login?: boolean}>){
+
+export default function AuthForm(props:Readonly<{email?: string, setEmail?: Function, setUsername?: Function,
+        password?: string, setPassword?: Function, login?: boolean, username?:string}>){
+    const auth = useAuth();
+    const navigate = useNavigate();
+
     return <Form>
             <FormGroup>
-                <FormLabel>Email</FormLabel>
-                <FormControl type="email" placeholder="Email" />
+                {!props.login && <>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl onChange={(e) => props.setEmail?.(e.target.value)}
+                    type="email" placeholder="Email" />
+                </>}
+                <FormLabel>Username</FormLabel>
+                <FormControl onChange={(e) => props.setUsername?.(e.target.value)} 
+                type="text" placeholder="Username" />
                 
                 <FormLabel>Password</FormLabel>
-                <FormControl type="password" placeholder="Password" /> 
+                <FormControl onChange={(e) => props.setPassword?.(e.target.value)} 
+                type="password" placeholder="Password" /> 
 
-                <Button className="w-100 my-3" type="submit">{props.login ? "Sign in" : "Sign up"}</Button>
+                <Button onClick={() => {
+                    if(props.login){
+                        auth?.login(props.username, props.password).then(()=> navigate('/'))
+                    }else{
+                        UserRegister(props.email??"", props.password??"", props.username??"")
+                        .then(() => {
+                            auth?.login(props.username, props.password).then(() => navigate('/'));
+                        })
+                    }
+                }} className="w-100 my-3">
+                    {props.login ? "Sign in" : "Sign up"}
+                </Button>
             </FormGroup>
             <div className="text-center">
                 or continue with

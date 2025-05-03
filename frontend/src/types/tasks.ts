@@ -1,4 +1,3 @@
-// Représente une tâche task
 export interface Task {
     id: number;
     title: string;
@@ -39,24 +38,3 @@ export interface Task {
     priority?: Priority;
     status?: Status;
   }
-  
-  // Représente un utilisateur
-  export interface User {
-    id: number;
-    username: string;
-    email?: string;
-  }
-  
-  // Pour s’inscrire ou se connecter
-  export interface AuthCredentials {
-    username: string;
-    password: string;
-  }
-  
-  // Réponse d’authentification (ex : login)
-  export interface AuthResponse {
-    access_token: string;
-    refresh_token?: string;
-    user: User;
-  }
-  

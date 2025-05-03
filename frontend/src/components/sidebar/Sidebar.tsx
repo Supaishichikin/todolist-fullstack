@@ -19,7 +19,7 @@ export default function Sidebar(){
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <div className="sidebar-content">
-                            <SidebarItem link="/" icon="home" text="Home" />
+                            <SidebarItem link="/tasks" icon="home" text="Home" />
                             <SidebarItem link="/settings" icon="settings" text="Account settings" />
                             <SidebarItem link="/achievements" icon="emoji_events" text="Achievements" />
                         </div>

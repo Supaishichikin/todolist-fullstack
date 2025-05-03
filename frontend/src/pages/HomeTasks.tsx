@@ -3,7 +3,7 @@ import "../css/Home.css";
 import TaskCard from "../components/cards/TaskCard";
 import TaskModals from "../components/modals/TaskModals";
 import { useEffect, useState } from "react";
-import { Priority, Status, Task } from "../types";
+import { Priority, Status, Task } from "../types/tasks";
 import { getTasks } from "../services/TaskServices";
 
 export default function HomeTasks() {
@@ -17,8 +17,10 @@ export default function HomeTasks() {
     },[])
 
     useEffect(()=>{
-        if(tasks.length > 0){
-            console.log(tasks)
+        if(tasks){
+            if(tasks.length > 0){
+                console.log(tasks)
+            }
         }
     }, [tasks])
 

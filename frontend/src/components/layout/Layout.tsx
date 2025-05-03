@@ -1,6 +1,6 @@
 import React from "react"
-import Sidebar from "../components/sidebar/Sidebar"
-import "../css/Layout.css"
+import Sidebar from "../sidebar/Sidebar"
+import "../../css/Layout.css"
 
 export default function Layout({children}: Readonly<LayoutProps>){
     return <>

@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap"
 import { useState } from "react"
-import AuthForm from "../components/form/AuthForm"
+import AuthForm from "../../components/form/AuthForm"
 export default function Login(){
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     return <Container className="mt-5 d-flex flex-column align-items-center">
         <h1 className="text-center">Tasks</h1>
@@ -10,7 +10,7 @@ export default function Login(){
             <h2>Log in</h2>
             <h3 className="mt-3">Enter your email and password to log in</h3>
         </div>
-        <AuthForm email={email} setEmail={setEmail} login={true} 
+        <AuthForm  username={username} setUsername={setUsername} login={true} 
             password={password} setPassword={setPassword} />
     </Container>
 }

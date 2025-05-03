@@ -1,7 +1,7 @@
 import "../../css/TaskCard.css";
 import TaskModals from "../modals/TaskModals";
 import { useState } from "react";
-import { UpdateTask } from "../../types";
+import { UpdateTask } from "../../types/tasks";
 
 export default function TaskCard(props:Readonly<{ id: string, values: UpdateTask}>){
     const [showTaskModal, setShowTaskModal] = useState(false);

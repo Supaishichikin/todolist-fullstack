@@ -1,5 +1,5 @@
 import { Form} from "react-bootstrap"
-import { UpdateTask, Status, Priority } from "../../types"
+import { UpdateTask, Status, Priority } from "../../types/tasks"
 import { useState } from "react";
 
 export default function FormTask(props:Readonly<{new:boolean, values:UpdateTask}>){

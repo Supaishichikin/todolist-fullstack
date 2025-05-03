@@ -2,9 +2,7 @@ import axiosInstance from '../utils/axiosInstance';
 
 export async function getTasks() {
   try {
-    const response = await axiosInstance.get('/tasks', {
-    });
-    return response.data;
+    return await axiosInstance.get('/tasks/');
   }catch(error: any) {
     return error.response;
   }

@@ -1,3 +1,6 @@
+/**
+ * Component to display tasks
+ */
 import "../../css/TaskCard.css";
 import TaskModals from "../modals/TaskModals";
 import { useState } from "react";

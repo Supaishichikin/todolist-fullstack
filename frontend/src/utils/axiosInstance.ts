@@ -1,6 +1,11 @@
+/**
+ * Creation of an axios instance to handle requests authorizations 
+ * on routes and refresh token
+ */
 import axios from "axios";
-import { UserRefreshToken } from "../services/AuthServices";
+import { handleAuthRefresh, isTokenExpired } from "./authTokenRefresh";
 
+// Base axios instance
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
@@ -8,9 +13,12 @@ const axiosInstance = axios.create({
     },
 });
 
+// Interceptor to handle requests authorizations and refresh token
 axiosInstance.interceptors.request.use(
     async (req) => {
-
+      /**
+       * exclude free acess pages from authorization handling 
+       */
       if (
         req.url?.includes('auth/token/') ||
         req.url?.includes('auth/register/') ||
@@ -21,35 +29,22 @@ axiosInstance.interceptors.request.use(
         return req;
       }
 
+      //Authorization header handling
+
+      //Retrieve access token from localstorage
       let accessToken = localStorage.getItem('userToken');
-      const refreshToken = localStorage.getItem('userRefreshToken');
-      
   
-      if (!accessToken || !refreshToken) {
-        return Promise.reject(new Error("User not authenticated"));
-      }
-  
-      const isExpired = (token: string): boolean => {
-        try {
-          const payload = JSON.parse(atob(token.split('.')[1]));
-          return Date.now() >= payload.exp * 1000;
-        } catch {
-          return true;
-        }
-      };
-  
-      if (isExpired(accessToken)) {
-        try {
-          UserRefreshToken(refreshToken).then((response) =>{
-            accessToken = response.data.access as string;
-            localStorage.setItem('userToken', accessToken);
-          })
-        } catch (err) {
-          localStorage.clear();
-          return Promise.reject(err);
+      // if exist, check if token as expired
+      if(accessToken){
+        if (isTokenExpired(accessToken)) {
+            // handling refresh token
+            const response = await handleAuthRefresh();
+            if(response.access){
+                accessToken = response.access;
+            }
         }
       }
-  
+      // Add Authorization header with a valid token
       req.headers['Authorization'] = `Bearer ${accessToken}`;
       return req;
     },

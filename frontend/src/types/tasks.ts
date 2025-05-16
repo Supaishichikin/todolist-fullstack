@@ -1,3 +1,7 @@
+/**
+ * Interfaces for tasks related objects
+ */
+
 export interface Task {
     id: number;
     title: string;

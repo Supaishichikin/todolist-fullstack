@@ -1,10 +1,17 @@
-import React from "react"
-import Sidebar from "../sidebar/Sidebar"
-import "../../css/Layout.css"
+/**
+ * Component to handle main behavior of page display
+ */
+
+import React from "react";
+import Sidebar from "../sidebar/Sidebar";
+import { SidebarContextProvider } from "../../contexts/sidebarContextProvider";
+import "../../css/Layout.css";
 
 export default function Layout({children}: Readonly<LayoutProps>){
     return <>
-        <Sidebar />
+        <SidebarContextProvider>
+            <Sidebar />
+        </SidebarContextProvider>
         <LayoutContent>
             {children}
         </LayoutContent>

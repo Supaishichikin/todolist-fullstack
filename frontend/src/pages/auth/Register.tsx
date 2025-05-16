@@ -1,12 +1,25 @@
 import { Container } from "react-bootstrap"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AuthForm from "../../components/form/AuthForm"
+import { useAuth } from "../../contexts/authContextProvider"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Register(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("");
+
+    // If the user is authenticated we want him to be redirected to homepage
+    const auth = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // redirection to homepage if user is authenticated
+        if(auth?.isAuthenticated){
+            navigate('/tasks')
+        }
+    },[auth])
 
     return <Container className="mt-5 d-flex flex-column align-items-center">
         <h1 className="text-center">Tasks</h1>

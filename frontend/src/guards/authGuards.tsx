@@ -1,5 +1,6 @@
-import {Navigate, useLocation} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useAuth } from "../contexts/authContextProvider"; 
+import { useEffect } from "react";
 
 interface RequireAuthInterface {
     children?: React.ReactNode
@@ -7,11 +8,13 @@ interface RequireAuthInterface {
 
 export const AuthGuard: React.FC<RequireAuthInterface> = ({children}) => {
     const auth = useAuth();
-    const location = useLocation();
-
-    if (!auth?.isAuthenticated) {
-        return <Navigate to="/login" state={{path: location.pathname}}/>;
-    }
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!auth?.isAuthenticated){
+            navigate('/login')
+        }
+    },[auth])
+    
     return (
         <>
             {children}

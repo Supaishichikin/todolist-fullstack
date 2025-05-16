@@ -1,3 +1,6 @@
+/**
+ * Component to display sidebar items
+ */
 import { Link } from "react-router-dom";
 
 export default function SidebarItem(props:Readonly<{link: string, icon: string, text: string}>){

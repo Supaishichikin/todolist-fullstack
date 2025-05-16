@@ -1,3 +1,7 @@
+/**
+ * Component to handle Login/Registration form
+ */
+
 import { Form, FormGroup, FormControl, FormLabel, Button, FormText } from "react-bootstrap";
 import { useAuth } from "../../contexts/authContextProvider";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +13,25 @@ export default function AuthForm(props:Readonly<{email?: string, setEmail?: Func
     const auth = useAuth();
     const navigate = useNavigate();
 
-    return <Form>
+    const handleSubmit = () => {
+        if(props.login){
+            auth?.login(props.username, props.password).then(()=> navigate('/'))
+        }else{
+            UserRegister(props.email??"", props.password??"", props.username??"")
+            .then(() => {
+                auth?.login(props.username, props.password).then(() => navigate('/'));
+            })
+        }
+    }
+
+    const handleKeyDownSubmit = (e: React.KeyboardEvent) => {
+        if(e.key === "Enter"){
+            e.preventDefault();
+            handleSubmit();
+        }
+    }
+
+    return <Form onKeyDown={(e) => handleKeyDownSubmit(e)}>
             <FormGroup>
                 {!props.login && <>
                     <FormLabel>Email</FormLabel>
@@ -24,16 +46,7 @@ export default function AuthForm(props:Readonly<{email?: string, setEmail?: Func
                 <FormControl onChange={(e) => props.setPassword?.(e.target.value)} 
                 type="password" placeholder="Password" /> 
 
-                <Button onClick={() => {
-                    if(props.login){
-                        auth?.login(props.username, props.password).then(()=> navigate('/'))
-                    }else{
-                        UserRegister(props.email??"", props.password??"", props.username??"")
-                        .then(() => {
-                            auth?.login(props.username, props.password).then(() => navigate('/'));
-                        })
-                    }
-                }} className="w-100 my-3">
+                <Button onClick={handleSubmit} className="w-100 my-3">
                     {props.login ? "Sign in" : "Sign up"}
                 </Button>
             </FormGroup>

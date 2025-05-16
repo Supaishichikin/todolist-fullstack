@@ -1,3 +1,7 @@
+/**
+ * Routing of the application using react router dom hook
+ */
+
 import { useRoutes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import HomeTasks from "../pages/HomeTasks";

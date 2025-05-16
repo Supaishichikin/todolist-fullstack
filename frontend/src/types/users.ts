@@ -1,3 +1,7 @@
+/**
+ * Interfaces for Users related objects
+*/
+
 export interface User {
     id: number;
     username: string;
@@ -19,9 +23,13 @@ export interface AuthResponse {
 
 export interface AuthContextInterface {
     userToken: string | null,
+    userRefreshToken: string | null,
+    setUserToken: Function,
+    setUserRefreshToken: Function,
     login: Function,
     logout: Function,
-    isAuthenticated: boolean
+    isAuthenticated: boolean,
+    setIsAuthenticated: Function,
     updateUserToken: Function
 }
 

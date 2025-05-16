@@ -1,3 +1,7 @@
+/**
+ * Creation and Update tasks modal component
+ */
+
 import { Modal, Button } from "react-bootstrap";
 import { Priority, Status, UpdateTask } from "../../types/tasks";
 import FormTodo from "../form/FormTask";

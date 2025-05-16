@@ -1,3 +1,7 @@
+/**
+ * Api calls tasks related operations
+ */
+
 import axiosInstance from '../utils/axiosInstance';
 
 export async function getTasks() {

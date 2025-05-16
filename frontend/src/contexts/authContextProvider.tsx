@@ -1,35 +1,35 @@
+/**
+ * Context provider to share auth informations and operations within the entire app
+ */
+
 import { useState, useEffect, useMemo, useContext } from "react";
 import AuthContext from "./authContext";
 import { AuthProviderInterface } from "../types/users";
-import { UserLogin, UserLogout, UserRefreshToken } from "../services/AuthServices";
+import { UserLogin, UserLogout } from "../services/AuthServices";
+import { handleAuthRefresh, isTokenExpired } from "../utils/authTokenRefresh";
 
-function isTokenExpired(token: string) {
-    if (!token) {
-      return true;
-    }
-    const tokenParts = token.split('.');
-    const tokenPayload = JSON.parse(atob(tokenParts[1]));
-    const expirationTime = tokenPayload.exp * 1000;
-    return Date.now() >= expirationTime;
-}
 
 export const AuthProvider: React.FC<AuthProviderInterface> = ({ children }) => {
-    const accessToken = localStorage.getItem("userToken") as string;
-    const refreshToken = localStorage.getItem("userRefreshToken") as string;
+    const accessToken = localStorage.getItem("userToken") ?? null;
+    const refreshToken = localStorage.getItem("userRefreshToken") ?? null;
 
     const [userToken, setUserToken] = useState<string | null>(accessToken
     !== null && !isTokenExpired(accessToken) ? accessToken : null);
-    const userRefreshToken = refreshToken
-    !== null && !isTokenExpired(refreshToken) ? refreshToken : null;
+    const [userRefreshToken, setUserRefreshToken] = useState(refreshToken
+    !== null && !isTokenExpired(refreshToken) ? refreshToken : null);
     const [isAuthenticated, setIsAuthenticated] = useState(userToken !== null);
 
-    useEffect(() => {
+    useEffect( () => {
         if (userToken !== null) {
             setIsAuthenticated(true);
-        } else if (userRefreshToken) {
-            UserRefreshToken(refreshToken).then((response) => {
-                setUserToken(response.data.access)
-                localStorage.setItem('userToken', response.data.access)
+        } else if (userRefreshToken !== null) {
+            handleAuthRefresh().then((response) => {
+                if(response.access){
+                    setIsAuthenticated(true);
+                    setUserToken(response.access)
+                }else{
+                    setIsAuthenticated(false);
+                }
             })
         } else {
             setIsAuthenticated(false);
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderInterface> = ({ children }) => {
 
     async function logout(token: string) {
         const response = await UserLogout(token);
-        if (response.status !== 200) {
+        if (response.status !== 205) {
             throw new Error(response.error ?? 'Logout failed');
         }
         setUserToken(null);
@@ -66,10 +66,14 @@ export const AuthProvider: React.FC<AuthProviderInterface> = ({ children }) => {
 
     return (
         <AuthContext.Provider value={useMemo(() => ({ 
-            userToken, 
+            userToken,
+            userRefreshToken,
+            setUserToken,
+            setUserRefreshToken,
             login, 
             logout, 
             isAuthenticated, 
+            setIsAuthenticated,
             updateUserToken: (token: string) => setUserToken(token) 
         }), [userToken, isAuthenticated])}>
             {children}

@@ -1,3 +1,6 @@
+/**
+ * Component to handle cretation/update tasks form
+ */
 import { Form} from "react-bootstrap"
 import { UpdateTask, Status, Priority } from "../../types/tasks"
 import { useState } from "react";

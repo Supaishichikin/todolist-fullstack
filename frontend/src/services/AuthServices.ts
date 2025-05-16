@@ -1,3 +1,7 @@
+/**
+ * Api calls for auth related operations
+ */
+
 import axiosInstance from '../utils/axiosInstance';
 
 export async function UserRegister(
